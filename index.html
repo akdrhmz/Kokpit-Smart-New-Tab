@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gizlilik Politikası — Kokpit</title>
+<style>
+  body { font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif; max-width: 760px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #222; background: #fff; }
+  h1 { font-size: 1.6rem; margin-bottom: 4px; }
+  h2 { font-size: 1.15rem; margin-top: 2em; border-bottom: 1px solid #ddd; padding-bottom: 4px; }
+  .updated { color: #666; font-size: 0.9rem; margin-bottom: 2em; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+  th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; font-size: 0.92rem; vertical-align: top; }
+  th { background: #f5f5f5; }
+  code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 0.9em; }
+  footer { margin-top: 3em; font-size: 0.85rem; color: #777; }
+</style>
+</head>
+<body><h1>Kokpit — Gizlilik Politikası</h1>
+<p class="updated">Son güncelleme: 23 Temmuz 2026 — Sürüm 1.4.0</p>
+
+<p>
+  Bu gizlilik politikası, "Kokpit - Akıllı Yeni Sekme" tarayıcı uzantısının
+  (bundan sonra "Uzantı") kullanıcı verilerini nasıl işlediğini açıklar.
+  Uzantı arayüzü Türkçe ve İngilizce dillerini destekler; bu politika
+  her iki dil için de geçerlidir.
+</p>
+
+<h2>Özet</h2>
+<p>
+  Uzantı, kullanıcı verilerini <strong>hiçbir zaman geliştiriciye veya
+  üçüncü bir sunucuya göndermez</strong>. Tüm ayarlar ve kişisel içerikler
+  (yer imleri, notlar, widget ayarları vb.) yalnızca kullanıcının kendi
+  cihazında, tarayıcının yerel depolama alanında (<code>browser.storage.local</code>)
+  tutulur. Kullanıcı isteğe bağlı olarak tarayıcının kendi hesap senkronizasyon
+  özelliğini (<code>browser.storage.sync</code> — Chrome/Firefox hesabınıza
+  bağlı, geliştiricinin erişimi olmayan bir mekanizma) açabilir; bu durumda
+  veri yalnızca kullanıcının kendi tarayıcı hesabı üzerinden cihazları arasında
+  senkronize olur.
+</p>
+
+<h2>Toplanan/İşlenen Veriler ve Nedenleri</h2>
+<table>
+  <tr><th>İzin</th><th>Ne için kullanılır</th><th>Veri nereye gider?</th></tr>
+  <tr>
+    <td><code>bookmarks</code></td>
+    <td>Board'daki sütunları oluşturmak, yer imi eklemek/düzenlemek/taşımak.</td>
+    <td>Yalnızca cihazda; tarayıcının kendi yer imi veritabanı okunur/yazılır.</td>
+  </tr>
+  <tr>
+    <td><code>storage</code>, <code>unlimitedStorage</code></td>
+    <td>Widget ayarlarını, tema tercihlerini, notları vb. saklamak.</td>
+    <td>Yalnızca cihazda (<code>browser.storage.local</code>).</td>
+  </tr>
+  <tr>
+    <td><code>history</code></td>
+    <td>Arama kutusunda geçmiş sayfa önerileri sunmak ve isteğe bağlı
+    "Son Ziyaret Edilenler" widget'ı.</td>
+    <td>Yalnızca cihazda okunur, hiçbir yere gönderilmez, senkronize edilmez.</td>
+  </tr>
+  <tr>
+    <td><code>tabs</code></td>
+    <td>Açık sekmeler widget'ı (listeleme, geçiş, kapatma, sabitleme) ve
+    bağlantıları yeni sekmede açma.</td>
+    <td>Yalnızca cihazda, anlık olarak; kaydedilmez.</td>
+  </tr>
+  <tr>
+    <td><code>alarms</code>, <code>notifications</code></td>
+    <td>Pomodoro zamanlayıcı ve hatırlatıcı bildirimleri.</td>
+    <td>Yalnızca cihazda.</td>
+  </tr>
+  <tr>
+    <td><code>favicon</code>, <code>offscreen</code> (yalnızca Chrome/Edge)</td>
+    <td>Yer imi/sekme ikonlarını güvenli şekilde göstermek.</td>
+    <td>Yalnızca cihazda; tarayıcının dahili favicon önbelleği kullanılır.</td>
+  </tr>
+  <tr>
+    <td>Host izinleri (belirli API'ler)</td>
+    <td>Bkz. aşağıdaki "Üçüncü Taraf Servisler" bölümü.</td>
+    <td>Yalnızca ilgili widget kullanıldığında, o servise gerekli minimum istek.</td>
+  </tr>
+</table>
+
+<h2>Üçüncü Taraf Servisler</h2>
+<p>
+  Bazı isteğe bağlı widget'lar (kullanıcı bunları etkinleştirmezse hiç
+  çağrılmaz), çalışabilmek için aşağıdaki üçüncü taraf servislere istek
+  gönderir. Bu servisler kendi gizlilik politikalarına tabidir ve Uzantı
+  geliştiricisi bu servislerin veri işleme pratiklerinden sorumlu değildir:
+</p>
+<ul>
+  <li><strong>open-meteo.com (api & geocoding)</strong> — hava durumu tahmin verileri ve şehir adı arama için.</li>
+  <li><strong>nominatim.openstreetmap.org</strong> — otomatik konum özelliğinde enlem/boylam bilgisini şehir adına dönüştürmek için (Reverse Geocoding).</li>
+  <li><strong>get.geojs.io</strong> — tarayıcı konum izni verilmediğinde veya başarısız olduğunda IP tabanlı tahmini konum sağlamak için.</li>
+  <li><strong>api.quotable.io</strong> — günün sözü widget'ı için alıntı metni.</li>
+  <li><strong>api.mymemory.translated.net</strong> — metin çeviri widget'ı.</li>
+  <li><strong>picsum.photos, loremflickr.com, source.unsplash.com</strong> —
+    arka plan/duvar kağıdı görselleri.</li>
+  <li><strong>radio-browser.info (de1/nl1/at1 sunucuları)</strong> — internet
+    radyosu widget'ı için istasyon listesi ve akış URL'leri.</li>
+</ul>
+<p>
+  Bu isteklerde kullanıcının kimliğini doğrudan ifşa eden bir bilgi (isim,
+  e-posta vb.) gönderilmez; yalnızca ilgili widget'ın işlevi için gerekli
+  parametreler (ör. konum koordinatları, çevrilecek metin, aranan radyo istasyonu adı) iletilir.
+</p>
+
+<h2>Veri Satışı ve Reklam</h2>
+<p>
+  Uzantı hiçbir kullanıcı verisini satmaz, kiralamaz veya reklam amacıyla
+  üçüncü taraflarla paylaşmaz. Uzantı içinde reklam bulunmaz.
+</p>
+
+<h2>Veri Saklama ve Silme</h2>
+<p>
+  Tüm veriler kullanıcının kendi cihazında saklanır. Uzantı kaldırıldığında
+  tarayıcı, <code>browser.storage.local</code> içindeki tüm verileri otomatik
+  olarak siler. Kullanıcı, tarayıcının "Uzantı Verilerini Temizle" seçeneğini
+  kullanarak da bu veriyi istediği an silebilir.
+</p>
+
+<h2>Çocukların Gizliliği</h2>
+<p>
+  Uzantı, yaş grubuna özel bir veri toplama davranışı içermez ve bilerek
+  13 yaş altı çocuklardan veri toplamaz.
+</p>
+
+<h2>Bu Politikadaki Değişiklikler</h2>
+<p>
+  Bu politika güncellenirse, bu sayfadaki "Son güncelleme" tarihi
+  değiştirilir. Önemli değişikliklerde mağaza listeleme sayfasındaki
+  sürüm notlarında da bilgi verilir.
+</p>
+
+<h2>İletişim</h2>
+<p>
+  Sorularınız için: <strong><a href="mailto:hamza_kadir@hotmail.com">hamza_kadir@hotmail.com</a></strong>
+</p>
+
+<footer>
+  Bu doküman, Chrome Web Store, Firefox Add-ons (AMO) ve Microsoft Edge
+  Add-ons mağaza gönderimleri için hazırlanmıştır.
+</footer>
+
+</body>
+</html>
